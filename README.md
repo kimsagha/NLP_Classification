@@ -1,2 +1,10 @@
 # SemanticEvolution
-Code Test administered by Semantic Evolution as part of the interview process. An NLP project aiming to detect whether a piece of text is a title or not, i.e., a binary classification problem.
+## ML Code Test - NLP Problem
+
+### Project Process in Steps
+1. Initialise git repository with source files
+2. Create Pycharm project with conda-environment using Python 3.9
+3. Read in data
+
+Python interpreter
+Conda environment with Python 3.9
