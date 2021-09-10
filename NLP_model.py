@@ -1,9 +1,11 @@
 # Import packages
 import pandas as pd
+from collections import Counter
 from sklearn.preprocessing import OrdinalEncoder
-from sklearn.metrics import confusion_matrix, f1_score
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from imblearn.combine import SMOTETomek
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, f1_score
 
 # read data
 # ISO-8859-1 is a latin encoding, with support for multiple languages,
@@ -22,13 +24,13 @@ print(df_train.isna().sum())  # shows no null values across all columns
 # check if data is balanced by printing the frequency of each label
 label_0 = df_train[df_train.Label == 0].shape[0]
 label_1 = df_train[df_train.Label == 1].shape[0]
-print('\nnumber of data points with label 0 =', label_0)
-print('number of data points with label 1 =', label_1)
-print('ratio of labels, 1/0 = ', round(label_1/label_0, 2))
+print('\nlabel counts {}', format(Counter(df_train.iloc[:, 9])))
+# (dealing with class-imbalance after vectorization of text-column)
 
-# deal with heavy class-imbalance in data (over-sampling?)
-###############################################################
-###############################################################
+# dimensionality reduction
+print(df_train.FontType.unique())  # shows that this string-feature has only one value, i.e., feature can be removed
+df_train = df_train.drop(['FontType'], axis=1)
+df_test = df_test.drop(['FontType'], axis=1)
 
 # encode discrete string-features numerically
 ord_enc = OrdinalEncoder()
@@ -38,11 +40,6 @@ df_train["IsUnderlined"] = ord_enc.fit_transform(df_train[["IsUnderlined"]]).ast
 df_test["IsBold"] = ord_enc.fit_transform(df_test[["IsBold"]]).astype(int)
 df_test["IsItalic"] = ord_enc.fit_transform(df_test[["IsItalic"]]).astype(int)
 df_test["IsUnderlined"] = ord_enc.fit_transform(df_test[["IsUnderlined"]]).astype(int)
-
-# dimensionality reduction
-print(df_train.FontType.unique())  # shows that this string-feature has only one value, i.e., feature can be removed
-df_train = df_train.drop(['FontType'], axis=1)
-df_test = df_test.drop(['FontType'], axis=1)
 
 # print result
 print(df_train.head(5))
@@ -65,20 +62,25 @@ test_text_vectorized = pd.DataFrame(test_text_vectorized, columns=vectorizer.get
 # concatenate vectorised texts with remaining columns into complete feature vectors
 train_x = pd.concat([train_text_vectorized, df_train.iloc[:, 1:8]], axis=1)
 test_x = pd.concat([test_text_vectorized, df_test.iloc[:, 1:8]], axis=1)
+# print(train_x.iloc[:, -1:].head(5))  # checking last column after concatenation
 
-print('check nulls in labels')
-print(train_x.isna().sum())
+# deal with heavy class-imbalance in data (over-sampling: SMOTETomek)
+# smote_t = SMOTETomek(random_state=100, n_jobs=-1)
+# train_x_bal, train_y_bal = smote_t.fit_resample(train_x, train_y)
+# print('resampled label counts {}', format(Counter(train_y_bal)))
 
-# train model, make predictions and estimate performance
-lr = LogisticRegression(max_iter=3000)  # class_weight='balanced'
+# # train model, make predictions and estimate performance
+lr = LogisticRegression(max_iter=3000)
 lr.fit(train_x, train_y)
 predictions = lr.predict(test_x)
 f1_score = f1_score(test_y, predictions, average='micro')
 print('f1 score: ', f1_score)
 print(confusion_matrix(predictions, test_y))
 
+# TO DO
+# build a pipeline and add more transformers?
+    # https: // scikit - learn.org / stable / tutorial / text_analytics / working_with_text_data.html
+# use cross validation to measure f1-score
+
 # NOTES
 # normalize left, right, top and bottom columns?
-# how much pre-processing should be done, w.r.t. lemmatizer, stemmatizer, stopwords, etc.
-# don't perform undersampling for class-imbalance
-# use cross validation to measure f1-score
