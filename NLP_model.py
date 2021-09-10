@@ -2,8 +2,9 @@
 import pandas as pd
 from collections import Counter
 from sklearn.preprocessing import OrdinalEncoder
+# import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
-from imblearn.combine import SMOTETomek
+# from imblearn.combine import SMOTETomek
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, f1_score
 
@@ -52,12 +53,23 @@ test_y = df_test.iloc[:, 8]
 train_text = df_train.iloc[:, 0]
 test_text = df_test.iloc[:, 0]
 
+# extract, tokenize and lemmatize texts in preparation for tf-idf vectorization
+# wn_lemmatizer = nltk.stem.WordNetLemmatizer()
+#
+#
+# def tokenizer_lemmatizer(text):
+#     return [wn_lemmatizer.lemmatize(w) for w in nltk.word_tokenize(text)]
+#
+#
+# train_text = df_train.iloc[:, 0].apply(tokenizer_lemmatizer)
+# test_text = df_test.iloc[:, 0].apply(tokenizer_lemmatizer)
+
 # vectorize texts and turn back into dataframes
-vectorizer = TfidfVectorizer(stop_words='english')
-train_text_vectorized = vectorizer.fit_transform(train_text).todense()
-train_text_vectorized = pd.DataFrame(train_text_vectorized, columns=vectorizer.get_feature_names())
-test_text_vectorized = vectorizer.transform(test_text).todense()
-test_text_vectorized = pd.DataFrame(test_text_vectorized, columns=vectorizer.get_feature_names())
+tfidf_vectorizer = TfidfVectorizer(stop_words='english')
+train_text_vectorized = tfidf_vectorizer.fit_transform(train_text).todense()  # to_dense from sparse matrix
+train_text_vectorized = pd.DataFrame(train_text_vectorized, columns=tfidf_vectorizer.get_feature_names())
+test_text_vectorized = tfidf_vectorizer.transform(test_text).todense()
+test_text_vectorized = pd.DataFrame(test_text_vectorized, columns=tfidf_vectorizer.get_feature_names())
 
 # concatenate vectorised texts with remaining columns into complete feature vectors
 train_x = pd.concat([train_text_vectorized, df_train.iloc[:, 1:8]], axis=1)
@@ -78,9 +90,9 @@ print('f1 score: ', f1_score)
 print(confusion_matrix(predictions, test_y))
 
 # TO DO
-# build a pipeline and add more transformers?
-    # https: // scikit - learn.org / stable / tutorial / text_analytics / working_with_text_data.html
 # use cross validation to measure f1-score
+# Try other models or tuning hyper parameters
+# Read through instructions
 
 # NOTES
 # normalize left, right, top and bottom columns?
