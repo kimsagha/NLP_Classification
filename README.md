@@ -6,7 +6,7 @@
 2. Create Pycharm project with conda-environment using
    Python 3.9 as the Python interpreter
 3. Install the following packages using pip:
-   - pandas, numpy, imblearn, tensorflow, keras
+   - pandas, numpy, imblearn, scikit-learn, tensorflow, keras
 4. Read in data
 5. Pre-process data
 6. Create and tune the model

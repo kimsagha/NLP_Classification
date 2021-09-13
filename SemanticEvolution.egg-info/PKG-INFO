@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: SemanticEvolution
+Version: 1.0
+Summary: Semantic Evolution NLP project for title detection.
+Home-page: UNKNOWN
+Author: kimsagha
+Author-email: kimiya.sagha@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Provides-Extra: nlp

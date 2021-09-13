@@ -1,0 +1,8 @@
+
+[nlp]
+pandas
+numpy
+imblearn
+scikit-learn
+tensorflow
+keras

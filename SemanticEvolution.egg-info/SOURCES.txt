@@ -1,0 +1,7 @@
+README.md
+setup.py
+SemanticEvolution.egg-info/PKG-INFO
+SemanticEvolution.egg-info/SOURCES.txt
+SemanticEvolution.egg-info/dependency_links.txt
+SemanticEvolution.egg-info/requires.txt
+SemanticEvolution.egg-info/top_level.txt
