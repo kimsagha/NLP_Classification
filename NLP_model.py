@@ -94,8 +94,9 @@ test_x = pd.concat([test_text_vectorized, df_test.iloc[:, 1:8]], axis=1)
 # print('resampled labels', format(Counter(train_y)))
 
 ###############################################################
+
 # SUPPORT VECTOR MACHINE
-# Train SVM classifier with hyperparameter tuning
+# Create and train SVM classifier with hyperparameter tuning
 # svc = SVC(kernel='linear')  # define model
 # parameters = {'C': [0.1, 1, 10], 'gamma': [0.1, 1, 10]}
 # grid_search = GridSearchCV(svc, parameters)
@@ -103,7 +104,7 @@ test_x = pd.concat([test_text_vectorized, df_test.iloc[:, 1:8]], axis=1)
 # print('Best accuracy:', grid_search.best_score_)
 # print('Best parameters:\n', grid_search.best_params_)
 
-# Train SVM classifier without hyperparameter tuning
+# Create and train SVM classifier without hyperparameter tuning
 # svc = SVC(kernel='linear')
 # svc.fit(train_x, train_y)
 # predictions = svc.predict(test_x)
