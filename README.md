@@ -41,7 +41,6 @@
   - Should I not have lowercased the words?
   - Is there anything else I should've done?
   - How else could I have dealt with class imbalance?
-  - I ended up forgetting to shuffle the dataset
   - How could I have built a data pipeline to process the entire
     dataset (including both numerical and text values)?
 
