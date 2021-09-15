@@ -95,22 +95,23 @@ test_x = pd.concat([test_text_vectorized, df_test.iloc[:, 1:8]], axis=1)
 
 ###############################################################
 
-# SUPPORT VECTOR MACHINE
-# Create and train SVM classifier with hyperparameter tuning
+# # SUPPORT VECTOR MACHINE
+# # Create and train SVM classifier with hyperparameter tuning
 # svc = SVC(kernel='linear')  # define model
 # parameters = {'C': [0.1, 1, 10], 'gamma': [0.1, 1, 10]}
 # grid_search = GridSearchCV(svc, parameters)
 # grid_search.fit(train_x, train_y)
 # print('Best accuracy:', grid_search.best_score_)
 # print('Best parameters:\n', grid_search.best_params_)
-
-# Create and train SVM classifier without hyperparameter tuning
+#
+# # Create and train SVM classifier without hyperparameter tuning
 # svc = SVC(kernel='linear')
 # svc.fit(train_x, train_y)
 # predictions = svc.predict(test_x)
 # f1_score = f1_score(test_y, predictions, average='micro')  # get performance metric
 # print('f1 score: ', f1_score)
 # print(confusion_matrix(predictions, test_y))  # print precision/recall details
+
 ###############################################################
 
 # NEURAL NETWORK

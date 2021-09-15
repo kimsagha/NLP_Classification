@@ -33,3 +33,32 @@
    - To reload previously trained model, comment out lines 118-170, 
      and run lines 174-182. It should take about 7 seconds and the model's
      accuracy will be printed in the terminal.
+
+### Questions
+- How much preprocessing should I have done?
+  - Are there any cases when it's better to stemmatize instead of lemmatize?
+  - Should I also have removed symbols?
+  - Should I not have lowercased the words?
+  - Is there anything else I should've done?
+  - How else could I have dealt with class imbalance?
+  - I ended up forgetting to shuffle the dataset
+  - How could I have built a data pipeline to process the entire
+    dataset (including both numerical and text values)?
+
+- How could I have improved the performance of the network?
+  - Would an LSTM layer (adding recurrence) have done that?
+  - CNN (or just for computer vision)?
+  - How do you decide on the best network topology for a project?
+  - Have you fully let go of keras and moved to sci-kit learn;
+    are they equally good?
+- Do you only use deep learning or other ML models as well?
+- What other prediction models could I have used?
+- What other libraries could I have used?
+- How did you generate the CSVs?
+- Do you parallelize the computation in your projects with big data frameworks?
+  - What do you do when your code is running?
+- How do you generate a setup script?
+
+- What sort of business problems do you solve with NLP?
+- Will I only work on NLP projects?
+- Does the client always just provide documents?
