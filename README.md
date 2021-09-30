@@ -1,5 +1,5 @@
-# Semantic Evolution
-### ML Code Test: NLP Problem
+## NLP
+### Binary Classification Problem
 
 ### Project Process in Steps
 1. Initialise git repository with source files
@@ -48,16 +48,3 @@
   - Would an LSTM layer (adding recurrence) have done that?
   - CNN (or just for computer vision)?
   - How do you decide on the best network topology for a project?
-  - Have you fully let go of keras and moved to sci-kit learn;
-    are they equally good?
-- Do you only use deep learning or other ML models as well?
-- What other prediction models could I have used?
-- What other libraries could I have used?
-- How did you generate the CSVs?
-- Do you parallelize the computation in your projects with big data frameworks?
-  - What do you do when your code is running?
-- How do you generate a setup script?
-
-- What sort of business problems do you solve with NLP?
-- Will I only work on NLP projects?
-- Does the client always just provide documents?
