@@ -53,7 +53,7 @@ df_test["IsUnderlined"] = ord_enc.fit_transform(df_test[["IsUnderlined"]])
 # normalize continuous features to re-scale the axis of the feature space
 scaler = MinMaxScaler()
 df_train.iloc[:, 4:8] = scaler.fit_transform(df_train.iloc[:, 4:8])
-df_test.iloc[:, 4:8] = scaler.fit_transform(df_test.iloc[:, 4:8])
+df_test.iloc[:, 4:8] = scaler.transform(df_test.iloc[:, 4:8])
 
 # print result
 print(df_train.head(5))
